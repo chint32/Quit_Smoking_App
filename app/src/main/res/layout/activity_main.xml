@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/holo_blue_bright">
+
+            <ImageView
+                android:id="@+id/cig_tracker_IV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@android:color/holo_red_light"
+                android:src="@drawable/tracker_icon"/>
+
+            <ImageView
+                android:id="@+id/money_savings_IV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@android:color/holo_orange_dark"
+                android:src="@drawable/money_saved_icon"/>
+
+            <ImageView
+                android:id="@+id/health_improvements_IV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#FDD023"
+                android:src="@drawable/health_icon"/>
+
+            <ImageView
+                android:id="@+id/badges_achieved_IV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@android:color/holo_green_light"
+                android:src="@drawable/trophy_icon"/>
+
+            <ImageView
+                android:id="@+id/cessation_services_IV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@android:color/holo_blue_bright"
+                android:src="@drawable/help_services_icon"
+                android:scaleX=".5"/>
+
+            <ImageView
+                android:id="@+id/motivational_videos_IV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@android:color/holo_purple"
+                android:src="@drawable/motivational_videos_icon"/>
+
+            <ImageView
+                android:id="@+id/setup_IV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#FFC0CB"
+                android:src="@drawable/tracker_icon"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
