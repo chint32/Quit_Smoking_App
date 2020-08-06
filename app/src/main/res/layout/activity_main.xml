@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="#FDD023"
-                android:src="@drawable/health_icon"/>
+                android:src="@drawable/health_icon" />
 
             <ImageView
                 android:id="@+id/badges_achieved_IV"
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="#FFC0CB"
-                android:src="@drawable/tracker_icon"/>
+                android:src="@drawable/setup_icon"/>
 
 
         </LinearLayout>
