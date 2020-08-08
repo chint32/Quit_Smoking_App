@@ -32,4 +32,8 @@
         <item>week</item>
         <item>month</item>
     </string-array>
+    <string-array name="notifications_yes_no">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
 </resources>

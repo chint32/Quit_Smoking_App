@@ -9,8 +9,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
+import com.chstudios.quitsmokingapp.notifications.MyWork
 import kotlinx.android.synthetic.main.activity_setup.*
 import java.util.*
+import java.util.concurrent.TimeUnit
+import androidx.work.PeriodicWorkRequestBuilder
 
 class SetupActivity : AppCompatActivity() {
 
@@ -18,6 +23,9 @@ class SetupActivity : AppCompatActivity() {
     private var packMultiplier = 1
     private var timeMultiplier = 1
     private var cigarettesPerHour = 0F
+    private var receiveNotifications = ""
+    private lateinit var request: PeriodicWorkRequest
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,7 +134,42 @@ class SetupActivity : AppCompatActivity() {
             }
         }
 
+        val notificationSpinner: Spinner = findViewById(R.id.notification_spinner)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.notifications_yes_no,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            notificationSpinner.adapter = adapter
+        }
+
+        val notifications = resources.getStringArray(R.array.notifications_yes_no)
+        notificationSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ) {
+                receiveNotifications = notifications[position]
+                Toast.makeText(
+                    this@SetupActivity,
+                    "You've selected: " + notifications[position],
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+            }
+        }
+
         save_button.setOnClickListener{
+
+            if(receiveNotifications == "yes")
+                scheduleDailyNotification()
+            else  WorkManager.getInstance(this).cancelAllWork()
+
+
 
             if(packMultiplier == 20)
                 cigarettesPerHour = (finalNumber * packMultiplier / timeMultiplier).toFloat()
@@ -140,5 +183,11 @@ class SetupActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    fun scheduleDailyNotification(){
+        Toast.makeText(this, "Notification scheduled", Toast.LENGTH_SHORT).show()
+        request = PeriodicWorkRequestBuilder<MyWork>(1, TimeUnit.DAYS).build()
+        WorkManager.getInstance(this).enqueue(request)
     }
 }
